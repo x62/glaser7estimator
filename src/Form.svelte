@@ -3,6 +3,8 @@
   export let id;
   export let name = "";
   export let price = 0;
+  let inputPrice;
+
   $: mode = id ? "edit" : "add";
   $: canSubmit = price >= 0 && name !== "";
   function submit() {
@@ -19,6 +21,7 @@
     }
 
     price = 0;
+    inputPrice.value = price;
     name = "";
     id = undefined;
   }
@@ -49,6 +52,7 @@
 
     <label for="priceField">Price</label>
     <input
+      bind:this={inputPrice}
       bind:value={price}
       min="0"
       step="any"
